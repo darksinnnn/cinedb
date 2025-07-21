@@ -305,10 +305,13 @@ export default function HomeScreen() {
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-[#0f0517] via-[#120823] to-[#0a0417] text-white">
-      {/* Hero Section with Animation */}
+      {/* Hero Section with Background Image and Animation */}
       <div className="relative w-full h-[70vh]">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#120823]/30 to-[#0f0517] z-10"></div>
-        <div className="hero-background absolute inset-0"></div>
+        {/* Background image - using a popular movie poster with higher opacity */}
+        <div className="absolute inset-0 bg-[url('https://image.tmdb.org/t/p/original/8b8R8l88Qje9dn9OE8PY05Nxl1X.jpg')] bg-cover bg-center opacity-60"></div>
+        
+        {/* Dark gradient overlay - lighter version */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0f0517]/30 via-[#120823]/70 to-[#0f0517] z-10"></div>
 
         {/* Updated Navigation without hamburger */}
         <Navigation />
