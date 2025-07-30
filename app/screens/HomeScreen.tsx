@@ -135,13 +135,24 @@ const POPULAR_LISTS = [
 ];
 
 const ALL_FILTERS = [
-  { name: "All", value: "all" },
-  { name: "Genre", value: "genre" },
-  { name: "Year", value: "year" },
-  { name: "Country", value: "country" },
+  { name: "Actor", value: "actor" },
   { name: "Director", value: "director" },
+  { name: "Studio", value: "studio" },
+  { name: "Genre", value: "genre" },
+  { name: "Cinematographer", value: "cinematographer" },
+  { name: "Music Composer", value: "composer" },
+  { name: "Writer", value: "writer" },
+  { name: "Release Year", value: "year" },
   { name: "Rating", value: "rating" },
-  { name: "Runtime", value: "runtime" },
+  { name: "Language", value: "language" },
+  { name: "Age Rating", value: "ageRating" },
+  { name: "Duration", value: "duration" },
+  { name: "Film Editor", value: "editor" },
+  {
+    name: "Critical Acclaim",
+    value: "acclaim",
+    options: ["Oscar Winner", "Golden Globe Nominee", "Cannes Selection"],
+  },
 ];
 
 // Revised MovieCard component for HomeScreen.tsx
@@ -174,26 +185,66 @@ const MovieCard = ({ movie, index }: { movie: any; index: number }) => {
               </p>
             </div>
           </div>
-          
+
           <div className="movie-actions">
             <button className="movie-action-btn" title="Watched">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
                 <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
                 <circle cx="12" cy="12" r="3"></circle>
               </svg>
             </button>
             <button className="movie-action-btn" title="Like">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
               </svg>
             </button>
             <button className="movie-action-btn" title="Rate">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
                 <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
               </svg>
             </button>
             <button className="movie-action-btn" title="Add to Watchlist">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
                 <line x1="12" y1="5" x2="12" y2="19"></line>
                 <line x1="5" y1="12" x2="19" y2="12"></line>
               </svg>
@@ -213,13 +264,13 @@ const PopularListItem = ({ item, index }: { item: any; index: number }) => {
       "https://image.tmdb.org/t/p/w500/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg",
       "https://image.tmdb.org/t/p/w500/ptpr0kGAckfQkJeJIt8st5dglvd.jpg",
       "https://image.tmdb.org/t/p/w500/kCGlIMHnOm8JPXq3rXM6c5wMxcT.jpg",
-      "https://image.tmdb.org/t/p/w500/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg"
-    ]
+      "https://image.tmdb.org/t/p/w500/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg",
+    ],
   ];
-  
+
   // Use modulo to cycle through the sample posters array
   const posterSet = samplePosters[0];
-  
+
   return (
     <motion.div
       className="list-card"
@@ -305,65 +356,13 @@ export default function HomeScreen() {
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-[#0f0517] via-[#120823] to-[#0a0417] text-white">
-      {/* Hero Section with Background Image and Animation */}
-      <div className="relative w-full h-[70vh]">
-        {/* Background image - using a popular movie poster with higher opacity */}
-        <div className="absolute inset-0 bg-[url('https://image.tmdb.org/t/p/original/8b8R8l88Qje9dn9OE8PY05Nxl1X.jpg')] bg-cover bg-center opacity-60"></div>
-        
-        {/* Dark gradient overlay - lighter version */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0f0517]/30 via-[#120823]/70 to-[#0f0517] z-10"></div>
+      {/* Updated Navigation Bar */}
+      <Navigation />
 
-        {/* Updated Navigation without hamburger */}
-        <Navigation />
-
-        {/* Hero Content */}
-        <div className="relative z-20 flex flex-col items-center justify-center h-full text-center px-8 pt-16">
-          <motion.h2
-            className="text-4xl md:text-6xl font-bold mb-4 hero-text"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.5 }}
-          >
-            Discover Great Cinema
-          </motion.h2>
-          <motion.p
-            className="text-lg md:text-xl text-purple-200 max-w-2xl mx-auto mb-8"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.7, delay: 0.8 }}
-          >
-            Explore the world of films, share your thoughts, and connect with movie
-            lovers
-          </motion.p>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 1 }}
-          >
-            <Link href="/search" className="cta-button">
-              Find Movies
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="m9 18 6-6-6-6"></path>
-              </svg>
-            </Link>
-          </motion.div>
-        </div>
-      </div>
-
-      {/* Main Content - Reordered as requested */}
-      <div className="container mx-auto px-8 pb-20">
+      {/* Main Content - Starting directly with Currently in Cinemas */}
+      <div className="container mx-auto px-8 pb-20 pt-24">
         {/* 1. Currently in Cinemas Section */}
-        <section className="mt-16">
+        <section>
           <motion.h2
             className="text-2xl font-bold mb-6"
             initial={{ opacity: 0, x: -20 }}
@@ -539,7 +538,19 @@ export default function HomeScreen() {
 
           <div className="filters-container mb-8">
             {ALL_FILTERS.map((filter, index) => (
-              <FilterButton key={index} name={filter.name} />
+              <div key={index} className="relative">
+                <FilterButton name={filter.name} />
+
+                {filter.options && (
+                  <div className="filter-dropdown">
+                    {filter.options.map((option, idx) => (
+                      <button key={idx} className="filter-option">
+                        {option}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
             ))}
           </div>
 
@@ -590,7 +601,7 @@ export default function HomeScreen() {
           background-color: rgba(126, 34, 206, 0.5);
           transform: scale(1.1);
         }
-          
+
         .profile-avatar-small {
           width: 40px;
           height: 40px;
@@ -734,7 +745,12 @@ export default function HomeScreen() {
           bottom: 0;
           left: 0;
           right: 0;
-          background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(76, 29, 149, 0.5), transparent);
+          background: linear-gradient(
+            to top,
+            rgba(0, 0, 0, 0.9),
+            rgba(0, 0, 0, 0.6),
+            transparent
+          );
           padding: 20px 16px;
           transform: translateY(100%);
           transition: transform 0.3s ease;
@@ -759,7 +775,7 @@ export default function HomeScreen() {
 
         .movie-details {
           font-size: 12px;
-          color: #a78bfa;
+          color: #e5e5e5;
         }
 
         /* New styles for movie action buttons */
@@ -843,7 +859,12 @@ export default function HomeScreen() {
         .list-overlay {
           position: absolute;
           inset: 0;
-          background: linear-gradient(to top, rgba(15, 5, 23, 0.9), rgba(15, 5, 23, 0.5) 50%, transparent);
+          background: linear-gradient(
+            to top,
+            rgba(15, 5, 23, 0.9),
+            rgba(15, 5, 23, 0.5) 50%,
+            transparent
+          );
           display: flex;
           align-items: flex-end;
           padding: 16px;
@@ -883,6 +904,37 @@ export default function HomeScreen() {
           display: grid;
           grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
           gap: 20px;
+        }
+
+        .filter-dropdown {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          margin-top: 4px;
+          background-color: #2d1a69;
+          border-radius: 8px;
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+          width: 200px;
+          overflow: hidden;
+          z-index: 10;
+          display: none;
+        }
+
+        .relative:hover .filter-dropdown {
+          display: block;
+        }
+
+        .filter-option {
+          display: block;
+          width: 100%;
+          padding: 8px 16px;
+          text-align: left;
+          font-size: 14px;
+          transition: all 0.2s ease;
+        }
+
+        .filter-option:hover {
+          background-color: #341e70;
         }
       `}</style>
     </main>
